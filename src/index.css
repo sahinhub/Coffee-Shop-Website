@@ -1,0 +1,25 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+
+
+@theme {
+  --font-rancho: "Rancho", cursive;
+  --font-raleway: "Raleway", sans-serif;
+
+  --color-brand: #E3B577;
+  --color-brand-light: #60a5fa;
+  --color-brand-dark: #1e3a8a;
+}
+.rancho {
+  font-family: "Rancho", cursive;
+  font-style: normal;
+}
+
+
+.raleway {
+  font-family: "Raleway", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
