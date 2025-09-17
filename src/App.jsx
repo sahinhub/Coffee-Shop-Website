@@ -2,7 +2,7 @@
 import { Outlet } from 'react-router-dom'
 import './App.css'
 import Header from './Component/Header'
-import Home from './Home'
+import Home from './Pages/Home'
 
 function App() {
  

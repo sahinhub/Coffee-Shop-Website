@@ -7,18 +7,27 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import ErrorPage from './ErrorPage.jsx';
-import Home from './Home.jsx';
+import Home from './Pages/Home.jsx';
+import AddCoffeePage from './Pages/AddCoffeePage.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App></App>,
     errorElement: <ErrorPage></ErrorPage>,
-    children: [{
-
-      path: "/",
-      element: <Home></Home>,
-    },
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
+      {
+        path: "/add-coffee",
+        element: <AddCoffeePage></AddCoffeePage>,
+      },
+      {
+        path: "/update-coffee",
+        element: <Home></Home>,
+      },
     ]
   },
 

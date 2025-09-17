@@ -12,8 +12,8 @@ const Hero = () => {
            </div>
            <div className='flex-1 space-y-3 px-3 '>
              <h1 className='text-[28px] lg:text-5xl font-rancho text-white'>Would you like a Cup of Delicious Coffee?</h1>
-             <p className='font-raleway text-gray-400'>It's coffee time - Sip & Savor - Relaxation in every sip! Get the nostalgia back!! Your companion of every moment!!! Enjoy the beautiful moments and make them memorable.</p>
-             <button className="btn bg-brand border hover:bg-transparent border-brand text-black hover:text-white">Learn More</button>
+             <p className='font-raleway text-gray-300'>It's coffee time - Sip & Savor - Relaxation in every sip! Get the nostalgia back!! Your companion of every moment!!! Enjoy the beautiful moments and make them memorable.</p>
+             <button className="btn bg-brand border hover:bg-transparent border-brand text-black hover:text-white font-rancho text-xl font-medium">Learn More</button>
 
            </div>
            </div>
