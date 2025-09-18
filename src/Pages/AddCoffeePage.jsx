@@ -6,17 +6,24 @@ import { GoArrowLeft } from 'react-icons/go';
 import Select from 'react-select';
 import '../App.css';
 
-const options = [
-  { value: 'apple', label: 'Apple' },
-  { value: 'banana', label: 'Banana' },
-  { value: 'orange', label: 'Orange' },
-  { value: 'grape', label: 'Grape' },
-  { value: 'kiwi', label: 'Kiwi' },
+const tastes = [
+  { value: 'floral', label: 'Floral' },
+  { value: 'tea-like', label: 'Tea-like' },
+  { value: 'jasmine', label: 'Jasmine' },
+  { value: 'bergamot', label: 'Bergamot' },
+  { value: 'tropical-fruit', label: 'Tropical Fruit' },
+];
+const categories = [
+  { value: 'single-origin', label: 'Single-Origin' },
+  { value: 'light-roast', label: 'light Roast' },
+  { value: 'medium-roast', label: 'Medium Roast' },
+  { value: 'espresso-blend', label: 'Espresso Blend' },
 ];
 
 const AddCoffeePage = () => {
   // <-- state moved here (not inside handler)
-  const [selectedTastes, setSelectedTastes] = useState([options[2], options[3]]); // initial default
+  const [selectedTastes, setSelectedTastes] = useState([tastes[2], tastes[3]]); // initial default
+  const [selectedCategories, setSelectedCategories] = useState([categories[0], categories[1]]); // initial default
 
   const handleAddCoffee = (e) => {
     e.preventDefault();
@@ -25,12 +32,12 @@ const AddCoffeePage = () => {
     const name = form.name.value;
     const chef = form.chef.value;
     const supplier = form.supplier.value;
-    const category = form.category.value;
     const details = form.details.value;
     const photo = form.photo.value;
 
     // convert selected react-select objects to array of values
     const taste = (selectedTastes || []).map((t) => t.value);
+    const category = (selectedCategories || []).map((c) => c.value);
 
     const coffeeInfo = { name, chef, supplier, taste, category, details, photo };
     console.log('Sending:', coffeeInfo);
@@ -88,54 +95,45 @@ const AddCoffeePage = () => {
             <div className="flex flex-col gap-4">
               <div className="space-y-3">
                 <label className="text-base mb-2 text-neutral-800">Taste</label>
-                
-                {/* ======= React-Select (controlled) ======= */}
+
+                {/* ======= Taste Select ======= */}
                 <Select
-                  options={options}
+                  options={tastes}
                   isMulti
-                  name="tastes"
                   value={selectedTastes}
                   onChange={(val) => setSelectedTastes(val || [])}
-                  className="basic-multi-select text-base"
-                  classNamePrefix="select"
                   placeholder="Enter coffee taste"
-                  /* classNames inject Tailwind classes */
+                  classNamePrefix="select"
                   classNames={{
                     control: () =>
-                      'w-full bg-white text-neutral-700 placeholder:text-neutral-500 border border-neutral-300 rounded-md focus:outline-none',
+                      'w-full bg-white text-neutral-700 placeholder:text-neutral-500 border border-neutral-300 rounded-md focus:border-brand focus:ring-1 focus:ring-brand',
                     menu: () => 'bg-white rounded-md shadow-md border border-neutral-200 mt-1',
                     option: (state) =>
                       state.isSelected
-                        ? 'px-3 py-2 bg-brand text-white cursor-pointer rounded-md'
+                        ? 'px-3 py-2 bg-brand text-white cursor-pointer rounded-md' // ✅ selected
                         : state.isFocused
-                        ? 'px-3 py-2 bg-brand/90 text-white cursor-pointer rounded-md'
-                        : 'px-3 py-2 text-neutral-700 cursor-pointer rounded-md hover:bg-brand hover:text-white',
-                    multiValue: () => 'bg-brand/10 text-brand rounded px-2 py-0.5 mr-1 flex items-center',
+                          ? 'px-3 py-2 bg-brand/90 text-white cursor-pointer rounded-md' // ✅ hovered/focused
+                          : 'px-3 py-2 text-neutral-700 cursor-pointer rounded-md hover:bg-brand hover:text-white', // ✅ default + hover
+                    multiValue: () =>
+                      'bg-brand/10 text-brand rounded px-2 py-0.5 mr-1 flex items-center',
                     multiValueLabel: () => 'text-brand text-sm',
-                    multiValueRemove: () => 'text-brand hover:bg-brand hover:text-white rounded-sm cursor-pointer',
+                    multiValueRemove: () =>
+                      'text-brand hover:bg-brand hover:text-white rounded-sm cursor-pointer',
                   }}
-                  /* Remove react-select default inline background/color so Tailwind hover works */
                   styles={{
-                    control: (provided) => {
-                      // remove inline background/borders so classes take effect
-                      const { backgroundColor, boxShadow, ...rest } = provided;
-                      return { ...rest };
-                    },
-                    menu: (provided) => {
-                      const { backgroundColor, ...rest } = provided;
-                      return { ...rest };
-                    },
-                    option: (provided) => {
-                      // remove inline background/color so our Tailwind hover/bg-brand works
-                      const { backgroundColor, color, ...rest } = provided;
-                      return { ...rest };
-                    },
-                    multiValue: (provided) => {
-                      const { backgroundColor, ...rest } = provided;
-                      return { ...rest };
-                    },
+                    option: (base) => ({
+                      ...base,
+                      backgroundColor: '', // remove default inline bg
+                    }),
+                    menu: (base) => ({
+                      ...base,
+                      backgroundColor: '',color:'black' // let Tailwind bg apply
+                    }),
                   }}
                 />
+
+
+
               </div>
             </div>
 
@@ -151,34 +149,71 @@ const AddCoffeePage = () => {
                 />
               </div>
 
-              
+              <div className="space-y-3 flex-1">
+                <label className="text-base mb-2 text-neutral-800">Price</label>
+                <input
+                  name="price"
+                  placeholder="Enter coffee Price"
+                  className="text-area w-full bg-white text-neutral-700 placeholder:text-neutral-500 focus:outline-0 focus:border-brand p-2"
+                />
+              </div>
+
+
             </div>
 
             <div className="flex flex-col lg:flex-row gap-4">
               <div className="space-y-3 flex-1">
                 <label className="text-base mb-2 text-neutral-800">Category</label>
-                <input
-                  name="category"
-                  type="text"
+                {/* ======= React-Select (controlled) ======= */}
+                <Select
+                  options={categories}
+                  isMulti
+                  value={selectedCategories}
+                  onChange={(val) => setSelectedCategories(val || [])}
                   placeholder="Enter coffee category"
-                  className="input w-full bg-white text-neutral-700 placeholder:text-neutral-500 focus:outline-0 focus:border-brand"
+                  classNamePrefix="select"
+                  classNames={{
+                    control: () =>
+                      'w-full bg-white text-neutral-700 placeholder:text-neutral-500 border border-neutral-300 rounded-md focus:border-brand focus:ring-1 focus:ring-brand',
+                    menu: () => 'bg-white rounded-md shadow-md border border-neutral-200 mt-1',
+                    option: (state) =>
+                      state.isSelected
+                        ? 'px-3 py-2 bg-brand text-white cursor-pointer rounded-md' // ✅ when selected
+                        : state.isFocused
+                          ? 'px-3 py-2 bg-brand/90 text-white cursor-pointer rounded-md' // ✅ when hovered/focused
+                          : 'px-3 py-2 text-neutral-700 cursor-pointer rounded-md hover:bg-brand hover:text-white', // ✅ default + hover
+                  }}
+                  styles={{
+                    option: (base) => ({
+                      ...base,
+                      backgroundColor: '', // remove inline gray
+                    }),
+                    menu: (base) => ({
+                      ...base,
+                      backgroundColor: '',color:'black' // let Tailwind bg apply
+                    }),
+                  }}
                 />
               </div>
 
+
+            </div>
+
+
+
+            <div className="flex flex-col  gap-4">
               <div className="space-y-3 flex-1">
                 <label className="text-base mb-2 text-neutral-800">Details</label>
                 <textarea
                   name="details"
-                  rows={1}
+                  rows={2}
                   placeholder="Enter coffee details"
-                  className="text-area w-full bg-white text-neutral-700 placeholder:text-neutral-500 focus:outline-0 focus:border-brand p-2"
+                  className="text-area w-full bg-white text-neutral-700 placeholder:text-neutral-500 focus:outline-0 focus:border-brand p-2 wrap-break-word"
                 />
               </div>
+                
             </div>
-        
-
-            
-            <div className="flex flex-col lg:flex-row gap-4">
+            <div className="flex flex-col  gap-4">
               <div className="space-y-3 flex-1 flex flex-col">
                 <label className="text-base mb-2 text-neutral-800 ">Coffee Image</label>
                 <label className="input bg-white text-neutral-800 w-full focus-within:border-brand validator focus-within:outline-none">

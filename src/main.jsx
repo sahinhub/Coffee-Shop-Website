@@ -19,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+        loader: async () => {
+          const res = await fetch('http://localhost:5000/coffees');
+          return res.json();
+        }
       },
       {
         path: "/add-coffee",
@@ -27,6 +31,7 @@ const router = createBrowserRouter([
       {
         path: "/update-coffee",
         element: <Home></Home>,
+        
       },
     ]
   },
