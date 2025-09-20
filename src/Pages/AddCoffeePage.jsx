@@ -55,7 +55,7 @@ const AddCoffeePage = () => {
   return (
     <div
       style={{ background: `url(${bg})` }}
-      className="py-8 bg-cover bg-center min-h-screen flex flex-col justify-center"
+      className="py-8 bg-contain bg-no-repeat bg-center min-h-screen flex flex-col justify-center"
     >
       <div className="max-w-3xl mx-auto space-y-5 px-2">
         <Link to={'/'} className="text-black font-rancho text-xl inline-flex items-center gap-2">
