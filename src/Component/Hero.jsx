@@ -4,7 +4,7 @@ const Hero = () => {
     return (
         <div style={{
             backgroundImage:`url(${heroBg})`
-        }} className='bg-cover bg-left lg:bg-bottom-right  flex gap-8 min-h-[500px] lg:min-h-[700px] items-center justify-center' >
+        }} className='bg-cover bg-left lg:bg-bottom-right  flex gap-8 min-h-[500px] lg:min-h-[700px] items-center justify-cente px-3 lg:px-0' >
             
            <div className=' flex gap-8 items-center justify-center container mx-auto flex-col lg:flex-row'>
             <div className='flex-1 px-3'>

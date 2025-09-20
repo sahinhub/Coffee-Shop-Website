@@ -41,7 +41,7 @@ const ProductsSection = () => {
   };
 
   return (
-    <div className='py-26  font-raleway relative bg-white text-center space-y-3'>
+    <div className='py-26  font-raleway relative bg-white text-center space-y-3 px-3 lg:px-0'>
       <h5 className='text-lg text-gray-900'>--- Sip & Savor ---</h5>
       <h2 className='text-brandTitle font-rancho text-4xl lg:text-5xl'>
         Our Popular Products
@@ -80,7 +80,7 @@ const ProductsSection = () => {
 Follow on Instagram  </h2>
 </div>
 
-<div className='grid container mx-auto gap-5 grid-cols-2 lg:grid-cols-4  mt-10'>
+<div className='grid container mx-auto gap-3 lg:gap-5 grid-cols-2 lg:grid-cols-4  mt-10'>
   {
     instaImages.map(i=>
       <img className='w-full' key={i.id} src={i.url}/>
