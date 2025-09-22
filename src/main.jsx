@@ -9,6 +9,7 @@ import {
 import ErrorPage from './ErrorPage.jsx';
 import Home from './Pages/Home.jsx';
 import AddCoffeePage from './Pages/AddCoffeePage.jsx';
+import ViewDetails from './Pages/ViewDetails.jsx';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,12 @@ const router = createBrowserRouter([
       {
         path: "/update-coffee",
         element: <Home></Home>,
+        
+      },
+      {
+        path: "/coffee/view-details/:id",
+        element: <ViewDetails></ViewDetails>,
+        loader:({params})=>fetch(`http://localhost:5000/coffee/${params.id}`)
         
       },
     ]

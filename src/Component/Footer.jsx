@@ -12,7 +12,7 @@ const Footer = () => {
 
             <div className='flex px-3 lg:px-0 flex-col container py-10 mx-auto lg:flex-row gap-5 '>
 
-                <div className='flex-1 space-y-2.5 flex flex-col justify-center items-center text-center lg:text-left'>
+                <div className='flex-1 space-y-2.5 flex flex-col justify-center items-center lg:items-start text-center lg:text-left'>
                     <img className='w-20' src={footerLogo} alt='Espresso Emporium' />
                     <h2 className='font-rancho text-4xl lg:text-left text-brandTitle '>Espresso Emporium</h2>
                     <p className='text-black'>
@@ -24,7 +24,7 @@ const Footer = () => {
                         <FaInstagram></FaInstagram>
                         <FaPinterest></FaPinterest>
                     </div>
-                    <div className='flex flex-col gap-2 text-2xl mt-6 text-black max-w-full lg:max-w-70 items-center '>
+                    <div className='flex flex-col gap-2 text-2xl mt-6 text-black max-w-full lg:max-w-70 '>
                         <h2 className='font-rancho text-4xl text-brandTitle'>Get In touch</h2>
 
                         <div className='flex gap-1 '>

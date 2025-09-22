@@ -4,6 +4,7 @@ import bg from '../assets/coffeeBG.png';
 import { Link } from 'react-router-dom';
 import { GoArrowLeft } from 'react-icons/go';
 import Select from 'react-select';
+import Swal from 'sweetalert2'
 import '../App.css';
 
 const tastes = [
@@ -48,7 +49,17 @@ const AddCoffeePage = () => {
       body: JSON.stringify(coffeeInfo),
     })
       .then((res) => res.json())
-      .then((data) => console.log('Server response:', data))
+      .then((data) => {
+        console.log('Server response:', data);
+        if (data.insertedId) {
+          Swal.fire({
+            title: 'Success!',
+            text: 'Coffee Successfully added',
+            icon: 'success',
+            confirmButtonText: 'Close'
+          })
+        }
+      })
       .catch((err) => console.error(err));
   };
 
@@ -127,7 +138,7 @@ const AddCoffeePage = () => {
                     }),
                     menu: (base) => ({
                       ...base,
-                      backgroundColor: '',color:'black' // let Tailwind bg apply
+                      backgroundColor: '', color: 'black' // let Tailwind bg apply
                     }),
                   }}
                 />
@@ -190,7 +201,7 @@ const AddCoffeePage = () => {
                     }),
                     menu: (base) => ({
                       ...base,
-                      backgroundColor: '',color:'black' // let Tailwind bg apply
+                      backgroundColor: '', color: 'black' // let Tailwind bg apply
                     }),
                   }}
                 />
@@ -211,7 +222,7 @@ const AddCoffeePage = () => {
                   className="text-area w-full bg-white text-neutral-700 placeholder:text-neutral-500 focus:outline-0 focus:border-brand p-2 wrap-break-word"
                 />
               </div>
-                
+
             </div>
             <div className="flex flex-col  gap-4">
               <div className="space-y-3 flex-1 flex flex-col">
