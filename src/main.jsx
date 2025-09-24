@@ -10,6 +10,9 @@ import ErrorPage from './ErrorPage.jsx';
 import Home from './Pages/Home.jsx';
 import AddCoffeePage from './Pages/AddCoffeePage.jsx';
 import ViewDetails from './Pages/ViewDetails.jsx';
+import UpdateCoffee from './Pages/UpdateCoffee.jsx';
+import SignUp from './Pages/SignUp.jsx';
+import AuthProvider from './Context/AuthProvider.jsx';
 
 const router = createBrowserRouter([
   {
@@ -31,8 +34,19 @@ const router = createBrowserRouter([
         
       },
       {
+        path: "/signup",
+        element: <SignUp></SignUp>,
+        
+      },
+      {
         path: "/coffee/view-details/:id",
         element: <ViewDetails></ViewDetails>,
+        loader:({params})=>fetch(`http://localhost:5000/coffee/${params.id}`)
+        
+      },
+      {
+        path: "/coffee/update/:id",
+        element: <UpdateCoffee></UpdateCoffee>,
         loader:({params})=>fetch(`http://localhost:5000/coffee/${params.id}`)
         
       },
@@ -44,6 +58,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>
 )

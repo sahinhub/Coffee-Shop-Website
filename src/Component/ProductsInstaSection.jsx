@@ -1,19 +1,67 @@
 'use client'
-import { BiCoffee } from 'react-icons/bi';
+import { BiCoffee, BiUser } from 'react-icons/bi';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import leftCup from '../assets/left cup overlay.png'
 import rightOverlay from '../assets/Rightimage.png'
 import { useEffect, useState } from 'react';
 import { FaEye, FaPen, FaRegEye } from 'react-icons/fa6';
 import { FaTrashAlt } from 'react-icons/fa';
+import Swal from 'sweetalert2';
+import UpdateCoffee from '../Pages/UpdateCoffee';
 
 const ProductsSection = () => {
-  const [coffees, setCoffes] = useState([]);
+
+  const [loadedCoffees, setLoadedCoffes] = useState([]);
+
   const [instaImages, setInstaImages] = useState([]);
 
   const navigate = useNavigate();
 
+  // handle sign up
 
+  const handleSignUp=()=>{
+    console.log('User Sign up');
+    navigate('/signup')
+  }
+
+  const handleDelete = (id) => {
+
+    console.log('Need to delete', id);
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+
+        fetch(`http://localhost:5000/coffee/delete/${id}`,{
+          method:'DELETE',
+        })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        if(data.deletedCount){
+          Swal.fire({
+          title: "Deleted!",
+          text: "Your coffee has been deleted.",
+          icon: "success"
+        });
+
+        const upadatedCoffee=loadedCoffees.filter(i=>i._id!==id);
+        setLoadedCoffes(upadatedCoffee);
+        }
+      })
+      }
+    });
+
+    
+  }
 
 
   useEffect(() => {
@@ -21,7 +69,7 @@ const ProductsSection = () => {
       const res = await fetch("http://localhost:5000/coffees");
       const data = await res.json();
       console.log(data);
-      setCoffes(data);
+      setLoadedCoffes(data);
     };
 
     const loadInstaImages = async () => {
@@ -48,12 +96,20 @@ const ProductsSection = () => {
       <h2 className='text-brandTitle font-rancho text-4xl lg:text-5xl'>
         Our Popular Products
       </h2>
-      <button
+      <div className='flex gap-2 justify-center'>
+        <button
         onClick={handleGoToAddCoffeePage}
         className='btn bg-brand text-black font-rancho text-xl hover:bg-transparent border border-brand'
       >
         Add a Coffee <BiCoffee />
       </button>
+        <button
+        onClick={handleSignUp}
+        className='btn bg-transparent shadow-none  text-black font-rancho text-xl hover:bg-transparent border-2 border-brand'
+      >
+        Sign Up <BiUser />
+      </button>
+      </div>
 
       <img className='absolute opacity-15 left-0 top-1/4 z-0' src={leftCup} alt="" />
       <img className='absolute opacity-15 right-0 top-1/4 z-0' src={rightOverlay} alt="" />
@@ -61,7 +117,7 @@ const ProductsSection = () => {
       <div
         className="mx-auto container grid grid-cols-1 lg:grid-cols-2 gap-6 mt-10 "
       >
-        {coffees.map((coffee, idx) => (
+        {loadedCoffees.map((coffee, idx) => (
           <div className="bg-[#F5F4F1] rounded-lg flex p-4 justify-between items-center gap-5 z-10" key={idx}>
             <img className='w-[200px] h-[220px] object-cover object-top rounded-lg' src={coffee.photo} alt={coffee.name} />
             <div className='flex-1 flex justify-between items-start text-left'>
@@ -81,13 +137,13 @@ const ProductsSection = () => {
                 <NavLink className='cursor-pointer' to={`/coffee/view-details/${coffee._id}`}>
                   <FaEye className='text-4xl bg-brand p-2 rounded cursor-pointer'></FaEye>
                 </NavLink>
-                <NavLink to={`/coffee/edit/${coffee._id}`}>
+                <NavLink to={`/coffee/update/${coffee._id}`}>
                   <FaPen className='text-4xl bg-[#3C393B] p-2 rounded cursor-pointer' />
                 </NavLink>
 
-                <NavLink to={`/coffee/delete/${coffee._id}`}>
+                <button onClick={() => handleDelete(coffee._id)}>
                   <FaTrashAlt className='text-4xl bg-red-700 p-2 rounded cursor-pointer' />
-                </NavLink>
+                </button>
 
 
               </div>
