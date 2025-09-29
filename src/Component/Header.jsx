@@ -5,7 +5,7 @@ const Header = () => {
         <div style={{
             backgroundImage:`url(${bgImage})`
         }} className='flex mx-auto bg-cover bg-center flex-col justify-center items-center py-1'>
-            <img className='w-[350px]' src="/src/assets/Logo.png" alt="" />
+            <img className='w-[350px]' src='https://i.postimg.cc/NGZmBfpd/Logo.png' alt="" />
         </div>
     );
 };
