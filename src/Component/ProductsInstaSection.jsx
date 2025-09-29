@@ -135,14 +135,14 @@ const ProductsSection = () => {
               <div className='flex self-center max-w-20 flex-col gap-4'>
 
                 <NavLink className='cursor-pointer' to={`/coffee/view-details/${coffee._id}`}>
-                  <FaEye className='text-4xl bg-brand p-2 rounded cursor-pointer'></FaEye>
+                  <FaEye className='text-4xl bg-brand p-2 text-white rounded cursor-pointer'></FaEye>
                 </NavLink>
                 <NavLink to={`/coffee/update/${coffee._id}`}>
-                  <FaPen className='text-4xl bg-[#3C393B] p-2 rounded cursor-pointer' />
+                  <FaPen className='text-4xl bg-[#3C393B] text-white  p-2 rounded cursor-pointer' />
                 </NavLink>
 
                 <button onClick={() => handleDelete(coffee._id)}>
-                  <FaTrashAlt className='text-4xl bg-red-700 p-2 rounded cursor-pointer' />
+                  <FaTrashAlt className='text-4xl text-white bg-red-700 p-2 rounded cursor-pointer' />
                 </button>
 
 
