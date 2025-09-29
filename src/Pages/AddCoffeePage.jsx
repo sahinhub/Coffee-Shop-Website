@@ -43,7 +43,7 @@ const AddCoffeePage = () => {
     const coffeeInfo = { name, chef, supplier, taste, category, details, photo };
     console.log('Sending:', coffeeInfo);
 
-    fetch('http://localhost:5000/coffees', {
+    fetch('https://mongo-coffee-shop-server.vercel.app/coffees', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(coffeeInfo),

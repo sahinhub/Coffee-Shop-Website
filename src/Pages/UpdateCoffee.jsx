@@ -28,7 +28,7 @@ const UpdateCoffee = () => {
         const coffeeInfoUpdate = { name, chef, supplier,price};
         console.log('Sending:', coffeeInfoUpdate);
     
-        fetch(`http://localhost:5000/coffee/update/${loadedCoffee._id}`, {
+        fetch(`https://mongo-coffee-shop-server.vercel.app/coffee/update/${loadedCoffee._id}`, {
           method: 'PUT',
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify(coffeeInfoUpdate),

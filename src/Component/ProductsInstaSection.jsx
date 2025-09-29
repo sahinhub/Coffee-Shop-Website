@@ -40,7 +40,7 @@ const ProductsSection = () => {
       if (result.isConfirmed) {
 
 
-        fetch(`http://localhost:5000/coffee/delete/${id}`,{
+        fetch(`https://mongo-coffee-shop-server.vercel.app/coffee/delete/${id}`,{
           method:'DELETE',
         })
       .then(res => res.json())
@@ -66,7 +66,7 @@ const ProductsSection = () => {
 
   useEffect(() => {
     const loadCoffees = async () => {
-      const res = await fetch("http://localhost:5000/coffees");
+      const res = await fetch("https://mongo-coffee-shop-server.vercel.app/coffees");
       const data = await res.json();
       console.log(data);
       setLoadedCoffes(data);

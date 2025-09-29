@@ -6,7 +6,7 @@ import ProductsSection from '../Component/ProductsInstaSection';
 const Home = () => {
 
     return (
-        <div className=''>
+        <div className='bg-white'>
             {/* Hero section  */}
             <Hero></Hero>
             <HeroBottom></HeroBottom>

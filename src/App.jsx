@@ -8,9 +8,11 @@ import Footer from './Component/Footer'
 function App() {
  
   return (
-    <div>
+    <div className='bg-white text-black'>
       <Header></Header>
-      <Outlet></Outlet>
+      <div className='min-h-screen'>
+        <Outlet></Outlet>
+      </div>
       <Footer></Footer>
     </div>
   )

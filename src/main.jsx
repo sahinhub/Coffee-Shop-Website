@@ -13,6 +13,8 @@ import ViewDetails from './Pages/ViewDetails.jsx';
 import UpdateCoffee from './Pages/UpdateCoffee.jsx';
 import SignUp from './Pages/SignUp.jsx';
 import AuthProvider from './Context/AuthProvider.jsx';
+import Users from './Pages/Users.jsx';
+import SignIn from './Pages/SignIn.jsx';
 
 const router = createBrowserRouter([
   {
@@ -39,15 +41,26 @@ const router = createBrowserRouter([
         
       },
       {
+        path: "/signin",
+        element: <SignIn></SignIn>,
+        
+      },
+      {
+        path: "/users",
+        element: <Users></Users>,
+        loader:()=>fetch('https://mongo-coffee-shop-server.vercel.app/users')
+        
+      },
+      {
         path: "/coffee/view-details/:id",
         element: <ViewDetails></ViewDetails>,
-        loader:({params})=>fetch(`http://localhost:5000/coffee/${params.id}`)
+        loader:({params})=>fetch(`https://mongo-coffee-shop-server.vercel.app/coffee/${params.id}`)
         
       },
       {
         path: "/coffee/update/:id",
         element: <UpdateCoffee></UpdateCoffee>,
-        loader:({params})=>fetch(`http://localhost:5000/coffee/${params.id}`)
+        loader:({params})=>fetch(`https://mongo-coffee-shop-server.vercel.app/coffee/${params.id}`)
         
       },
     ]
